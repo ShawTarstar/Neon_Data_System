@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Slf4j
-@RequestMapping("/clazzs")
+@RequestMapping("/admin/clazzs")
 @RestController
 public class ClazzController {
     @Autowired

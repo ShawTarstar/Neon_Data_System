@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@RequestMapping("/report")
+@RequestMapping("/admin/report")
 @RestController
 public class ReportController {
     @Autowired

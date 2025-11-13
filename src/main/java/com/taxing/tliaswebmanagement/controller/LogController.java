@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@RequestMapping("/log")
+@RequestMapping("/admin/log")
 @RestController
 public class LogController {
     @Autowired

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
-@RequestMapping("/emps")
+@RequestMapping("/admin/emps")
 @RestController
 public class EmpController {
 

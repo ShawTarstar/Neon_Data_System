@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Slf4j
-@RequestMapping("/depts")
+@RequestMapping("/admin/depts")
 @RestController
 public class DeptController {
     //private static final Logger log= LoggerFactory.getLogger(DeptController.class);
