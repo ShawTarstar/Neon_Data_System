@@ -3,6 +3,8 @@ package com.taxing.tliaswebmanagement.service;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
 import com.taxing.tliaswebmanagement.pojo.Student;
 import com.taxing.tliaswebmanagement.pojo.StudentQueryParam;
+import com.taxing.tliaswebmanagement.pojo.student.DTO.StudentLoginDTO;
+import com.taxing.tliaswebmanagement.pojo.student.VO.StudentLoginInfo;
 
 import java.util.List;
 
@@ -18,4 +20,6 @@ public interface StudentService {
     void delete(List<Integer> ids);
 
     void violation(Integer id, Integer score);
+
+    StudentLoginInfo login(StudentLoginDTO studentLoginDTO);
 }

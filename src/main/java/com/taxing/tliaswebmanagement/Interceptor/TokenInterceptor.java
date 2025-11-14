@@ -14,11 +14,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        String requestURI = request.getRequestURI();
-//        if(requestURI.contains("/login")){
-//            log.info("登录请求，放行");
-//            return true;
-//        }
+        String requestURI = request.getRequestURI();
+        if(requestURI.contains("/login")){
+            log.info("登录请求，放行");
+            return true;
+        }
         String token = request.getHeader("token");
         if(token==null||token.isEmpty()){
             log.info("令牌为空，响应401");
