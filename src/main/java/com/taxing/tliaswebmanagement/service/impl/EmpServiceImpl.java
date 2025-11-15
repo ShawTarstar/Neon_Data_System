@@ -104,7 +104,7 @@ public class EmpServiceImpl implements EmpService {
             claims.put("id",e.getId());
             claims.put("username",e.getUsername());
             String jwt= JwtUtils.generateToken(claims);
-            return new LoginInfo(e.getId(),e.getUsername(),e.getName(),jwt);
+            return new LoginInfo(e.getId(),e.getUsername(),e.getName(),jwt,1,e.getJob());
         }
         return null;
     }

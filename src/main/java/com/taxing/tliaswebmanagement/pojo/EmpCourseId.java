@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginInfo {
-    private Integer id;
-    private String username;
-    private String name;
-    private String token;
-    private Integer type;
-    private Integer job;
+public class EmpCourseId {
+    private Integer courseId;
+    private Integer period;
 }

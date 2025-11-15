@@ -42,7 +42,7 @@ public interface EmpMapper {
 
     List<EmpDTO> select();
 
-    @Select("select id,username,name from emp where username=#{username} and password=#{password}")
+    @Select("select id,username,name,job from emp where username=#{username} and password=#{password}")
     Emp selectByUsernameAndPassword(Emp emp);
 }
 

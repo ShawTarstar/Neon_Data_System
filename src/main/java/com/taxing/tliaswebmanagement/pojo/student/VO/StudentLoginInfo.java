@@ -12,4 +12,5 @@ public class StudentLoginInfo {
     private String no;
     private String name;
     private String token;
+    private Integer type;
 }

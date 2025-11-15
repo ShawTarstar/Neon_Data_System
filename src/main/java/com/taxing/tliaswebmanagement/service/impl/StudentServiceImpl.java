@@ -78,6 +78,7 @@ public class StudentServiceImpl implements StudentService {
             claims.put("username",studentLoginInfo.getNo());
             String jwt= JwtUtils.generateToken(claims);
             studentLoginInfo.setToken(jwt);
+            studentLoginInfo.setType(2);
             return studentLoginInfo;
         }
         return null;
