@@ -51,6 +51,7 @@ public class StudentServiceImpl implements StudentService {
     public void update(Student student) {
         student.setUpdateTime(LocalDateTime.now());
         studentMapper.update(student);
+        studentMapper.updateStudentLoginInfo(student);
     }
 
     @Override

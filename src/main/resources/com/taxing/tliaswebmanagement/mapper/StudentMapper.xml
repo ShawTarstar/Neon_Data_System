@@ -63,6 +63,18 @@
                            update_time=#{updateTime}
         where id=#{id};
     </update>
+    <update id="updateStudentLoginInfo">
+        update student_login
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="no!=null and no!=''">
+                no=#{no},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
     <delete id="delete">
         delete from student where id in
         <foreach collection="ids" item="id" open="(" close=")" separator=",">

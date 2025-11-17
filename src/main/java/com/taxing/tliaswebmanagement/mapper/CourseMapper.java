@@ -14,4 +14,7 @@ public interface CourseMapper {
 
     @Select("select course_name from course where id=#{id}")
     String selectCourseNameById(Integer id);
+
+    @Select("select course_id,period from student_course where student_id=#{id}")
+    List<EmpCourseId> getStudentSchd(Integer id);
 }

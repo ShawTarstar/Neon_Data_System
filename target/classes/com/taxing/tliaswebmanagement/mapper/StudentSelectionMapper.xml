@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taxing.tliaswebmanagement.mapper.StudentSelectionMapper">
+
+
+    <select id="list" resultType="com.taxing.tliaswebmanagement.pojo.student.other.StudentSelectionPageTemp">
+        select id, empId, courseId, period
+        from emp_course
+        where 1=1
+        <if test="empIds != null and empIds.size() > 0">
+            and empId in
+            <foreach item="empId" collection="empIds" separator="," open="(" close=")">
+                #{empId}
+            </foreach>
+        </if>
+
+        <if test="periodIds != null and periodIds.size() > 0">
+            and period in
+            <foreach item="periodId" collection="periodIds" separator="," open="(" close=")">
+                #{periodId}
+            </foreach>
+        </if>
+
+    </select>
+
+</mapper>

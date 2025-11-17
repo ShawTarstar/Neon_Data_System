@@ -44,5 +44,11 @@ public interface EmpMapper {
 
     @Select("select id,username,name,job from emp where username=#{username} and password=#{password}")
     Emp selectByUsernameAndPassword(Emp emp);
+
+    @Select("select id from emp where name like concat('%',#{name},'%')")
+    List<Integer> SelectEmpIdsByEmpName(String name);
+
+    @Select("select name from emp where id=#{id}")
+    String selectEmpNameById(Integer id);
 }
 

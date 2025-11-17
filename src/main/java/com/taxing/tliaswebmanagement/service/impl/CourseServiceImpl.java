@@ -24,4 +24,15 @@ public class CourseServiceImpl implements CourseService {
         });
         return courseVOList;
     }
+
+    @Override
+    public List<CourseVO> getStudentSchd(Integer id) {
+        List<EmpCourseId> list= courseMapper.getStudentSchd(id);
+        List<CourseVO> courseVOList=new ArrayList<>();
+        list.forEach(empCourseId -> {
+            String name=courseMapper.selectCourseNameById(empCourseId.getCourseId());
+            courseVOList.add(new CourseVO(name,empCourseId.getPeriod()));
+        });
+        return courseVOList;
+    }
 }

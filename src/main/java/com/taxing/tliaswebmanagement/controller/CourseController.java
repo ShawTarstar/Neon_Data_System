@@ -22,4 +22,9 @@ public class CourseController {
         List<CourseVO> list=courseService.getAdminSchd(id);
         return Result.success(list);
     }
+    @GetMapping("/student/schd")
+    public Result getStudentSchd(Integer id){
+        List<CourseVO> list=courseService.getStudentSchd(id);
+        return Result.success(list);
+    }
 }

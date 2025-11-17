@@ -36,4 +36,6 @@ public interface StudentMapper {
 
     @Select("select id,no,name from student_login where no=#{no} and password=#{password}")
     StudentLoginInfo login(StudentLoginDTO studentLoginDTO);
+
+    void updateStudentLoginInfo(Student student);
 }
