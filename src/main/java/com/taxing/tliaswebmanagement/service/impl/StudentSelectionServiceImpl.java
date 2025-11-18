@@ -9,9 +9,7 @@ import com.taxing.tliaswebmanagement.mapper.StudentSelectionMapper;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
 import com.taxing.tliaswebmanagement.pojo.student.DTO.StudentSelectionPageDTO;
 import com.taxing.tliaswebmanagement.pojo.student.VO.StudentSelectionPageVO;
-import com.taxing.tliaswebmanagement.pojo.student.other.StudentSelectionPageMapper;
-import com.taxing.tliaswebmanagement.pojo.student.other.StudentSelectionPageQuery;
-import com.taxing.tliaswebmanagement.pojo.student.other.StudentSelectionPageTemp;
+import com.taxing.tliaswebmanagement.pojo.student.other.*;
 import com.taxing.tliaswebmanagement.service.StudentSelectionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +98,15 @@ public class StudentSelectionServiceImpl implements StudentSelectionService {
 
         return new PageResult<StudentSelectionPageVO>(pageInfo.getTotal(),listVO);
     }
+
+    @Override
+    public void selectCourse(Integer studentId, Integer empCourseId) {
+        CourseIdAndPeriod courseIdAndPeriod=studentSelectionMapper.getCourseIdAndPeriodWithId(empCourseId);
+        StudentCourse studentCourse=new StudentCourse
+                (studentId,courseIdAndPeriod.getCourseId(),courseIdAndPeriod.getPeriod());
+        studentSelectionMapper.insert(studentCourse);
+    }
+
     private static List<Integer> getOccupiedPeriodsWithDateOrTime(Integer num,boolean type){
         //type=true，为date;type=false，为time
         List<Integer> list=new ArrayList<>();

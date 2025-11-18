@@ -8,6 +8,7 @@ import com.taxing.tliaswebmanagement.service.StudentSelectionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,11 @@ public class SelectionController {
         log.info("分页查询：{}",studentSelectionPageDTO);
         PageResult<StudentSelectionPageVO> pageResult= studentSelectionService.page(studentSelectionPageDTO);
         return Result.success(pageResult);
+    }
+    @PostMapping
+    public Result selectCourse(Integer studentId,Integer empCourseId){
+        log.info("选课：{},{}",studentId,empCourseId);
+        studentSelectionService.selectCourse(studentId,empCourseId);
+        return Result.success();
     }
 }
