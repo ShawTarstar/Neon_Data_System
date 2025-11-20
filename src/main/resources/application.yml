@@ -11,6 +11,12 @@ spring:
     multipart:
       max-file-size: 10MB #最大单个文件大小
       max-request-size: 100MB #最大请求大小（包括所有文件和表单数据）
+  data:
+    redis:
+      port: 6379
+      host: localhost
+      password: 123456
+      database: 9
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

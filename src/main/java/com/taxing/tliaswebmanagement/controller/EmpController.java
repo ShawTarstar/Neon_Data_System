@@ -6,6 +6,7 @@ import com.taxing.tliaswebmanagement.service.EmpService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,8 @@ public class EmpController {
     @Autowired
 
     private EmpService empService;
+    @Autowired
+    private RedisTemplate redisTemplate;
     @GetMapping
     public Result page(EmpQueryParam empQueryParam){
         log.info("分页查询:{}",empQueryParam);

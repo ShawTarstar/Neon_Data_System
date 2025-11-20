@@ -7,6 +7,7 @@ import com.taxing.tliaswebmanagement.pojo.student.VO.StudentSelectionPageVO;
 import com.taxing.tliaswebmanagement.service.StudentSelectionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.List;
 public class SelectionController {
     @Autowired
     StudentSelectionService studentSelectionService;
+    @Autowired
+    RedisTemplate redisTemplate;
     @GetMapping
     public Result page(StudentSelectionPageDTO studentSelectionPageDTO){
         log.info("分页查询：{}",studentSelectionPageDTO);
@@ -26,6 +29,8 @@ public class SelectionController {
     @PostMapping
     public Result selectCourse(Integer studentId,Integer empCourseId){
         log.info("选课：{},{}",studentId,empCourseId);
+        String key="student_schd_"+studentId;
+        redisTemplate.delete(key);
         studentSelectionService.selectCourse(studentId,empCourseId);
         return Result.success();
     }
@@ -36,7 +41,10 @@ public class SelectionController {
         return Result.success(list);
     }
     @DeleteMapping
-    public Result delete(Integer id){
+    public Result delete(Integer id,Integer studentId){
+        log.info("退选课程：{},学生id：{}",id,studentId);
+        String key="student_schd_"+studentId;
+        redisTemplate.delete(key);
         log.info("退选课程：{}",id);
         studentSelectionService.delete(id);
         return Result.success();
