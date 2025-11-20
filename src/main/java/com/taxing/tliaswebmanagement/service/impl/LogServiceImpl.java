@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.taxing.tliaswebmanagement.mapper.LogMapper;
 import com.taxing.tliaswebmanagement.pojo.OperateLog;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
+import com.taxing.tliaswebmanagement.pojo.student.other.OperateLogStudent;
 import com.taxing.tliaswebmanagement.service.LogService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,12 @@ public class LogServiceImpl implements LogService {
         PageHelper.startPage(page,pageSize);
         Page<OperateLog> p=(Page<OperateLog>) logMapper.list(page,pageSize);
         return new PageResult<OperateLog>(p.getTotal(),p.getResult());
+    }
+
+    @Override
+    public PageResult<OperateLogStudent> pageStudent(Integer page, Integer pageSize,Integer id) {
+        PageHelper.startPage(page,pageSize);
+        Page<OperateLogStudent> p=(Page<OperateLogStudent>) logMapper.listStudent(page,pageSize,id);
+        return new PageResult<OperateLogStudent>(p.getTotal(),p.getResult());
     }
 }

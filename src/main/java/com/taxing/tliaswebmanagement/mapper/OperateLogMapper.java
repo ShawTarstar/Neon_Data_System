@@ -1,6 +1,7 @@
 package com.taxing.tliaswebmanagement.mapper;
 
 import com.taxing.tliaswebmanagement.pojo.OperateLog;
+import com.taxing.tliaswebmanagement.pojo.student.other.OperateLogStudent;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,4 +13,7 @@ public interface OperateLogMapper {
             "values (#{operateEmpId}, #{operateTime}, #{className}, #{methodName}, #{methodParams}, #{returnValue}, #{costTime});")
     public void insert(OperateLog log);
 
+    @Insert("insert into student_operate_log (operate_student_id, operate_time, operation,courseName,period)" +
+            "values (#{operateStudentId},#{operateTime},#{operation},#{courseName},#{period}) ")
+    public void studentInsert(OperateLogStudent log);
 }

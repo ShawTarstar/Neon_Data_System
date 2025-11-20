@@ -3,9 +3,12 @@ package com.taxing.tliaswebmanagement.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.taxing.tliaswebmanagement.anno.StudentLog;
+import com.taxing.tliaswebmanagement.exception.BusinessException;
 import com.taxing.tliaswebmanagement.mapper.CourseMapper;
 import com.taxing.tliaswebmanagement.mapper.EmpMapper;
 import com.taxing.tliaswebmanagement.mapper.StudentSelectionMapper;
+import com.taxing.tliaswebmanagement.pojo.Clazz;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
 import com.taxing.tliaswebmanagement.pojo.student.DTO.StudentSelectionPageDTO;
 import com.taxing.tliaswebmanagement.pojo.student.VO.StudentSelectionPageVO;
@@ -92,19 +95,41 @@ public class StudentSelectionServiceImpl implements StudentSelectionService {
                     temp.getId(),
                     courseMapper.selectCourseNameById(temp.getCourseId()),
                     empMapper.selectEmpNameById(temp.getEmpId()),
-                    temp.getPeriod()
+                    temp.getPeriod(),
+                    temp.getId()
             ));
         }
 
         return new PageResult<StudentSelectionPageVO>(pageInfo.getTotal(),listVO);
     }
 
+    @StudentLog
     @Override
     public void selectCourse(Integer studentId, Integer empCourseId) {
         CourseIdAndPeriod courseIdAndPeriod=studentSelectionMapper.getCourseIdAndPeriodWithId(empCourseId);
+        Integer period=courseIdAndPeriod.getPeriod();
+        //检查时段是否被占用
+        StudentCourse s=studentSelectionMapper.getPeriodCourse(studentId,period);
+        if(s!=null){
+            throw new BusinessException("该时段已被占用");
+        }
         StudentCourse studentCourse=new StudentCourse
-                (studentId,courseIdAndPeriod.getCourseId(),courseIdAndPeriod.getPeriod());
+                (studentId,courseIdAndPeriod.getCourseId(),courseIdAndPeriod.getPeriod(),empCourseId);
         studentSelectionMapper.insert(studentCourse);
+    }
+
+    @Override
+    public PageResult<StudentSelectionPageVO> pageSelectedCourse(Integer id, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<StudentSelectionPageVO> list=studentSelectionMapper.pageSelectedCourse(id);
+        Page<StudentSelectionPageVO> p=(Page<StudentSelectionPageVO>) list;
+        return new PageResult<StudentSelectionPageVO>(p.getTotal(),p.getResult());
+    }
+
+    @StudentLog
+    @Override
+    public void delete(Integer id) {
+        studentSelectionMapper.delete(id);
     }
 
     private static List<Integer> getOccupiedPeriodsWithDateOrTime(Integer num,boolean type){

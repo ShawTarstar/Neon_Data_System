@@ -11,4 +11,5 @@ public class StudentCourse {
     private Integer StudentId;
     private Integer courseId;
     private Integer period;
+    private Integer empCourseId;
 }

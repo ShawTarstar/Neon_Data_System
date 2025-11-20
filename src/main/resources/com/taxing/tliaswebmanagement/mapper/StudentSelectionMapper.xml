@@ -24,5 +24,13 @@
         </if>
 
     </select>
+    <select id="pageSelectedCourse"
+            resultType="com.taxing.tliaswebmanagement.pojo.student.VO.StudentSelectionPageVO">
+        select DISTINCT s.id id,c.course_name courseName,e.name empName,
+               s.period period,s.empCourseId empCourseId from
+            student_course s,emp_course ec,course c,emp e
+        where s.student_id=#{id} and s.empCourseId=ec.id
+          and ec.courseId=c.id and  ec.empId=e.id
+    </select>
 
 </mapper>

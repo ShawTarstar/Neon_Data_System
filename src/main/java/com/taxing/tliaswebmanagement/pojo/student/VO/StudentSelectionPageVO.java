@@ -12,4 +12,6 @@ public class StudentSelectionPageVO {
     private String courseName;
     private String empName;
     private Integer period;
+
+    private Integer empCourseId;
 }
