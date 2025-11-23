@@ -1,14 +1,12 @@
 package com.taxing.tliaswebmanagement.aop;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.taxing.tliaswebmanagement.mapper.OperateLogMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.OperateLogMapper;
 import com.taxing.tliaswebmanagement.pojo.OperateLog;
 import com.taxing.tliaswebmanagement.utils.CurrentHolder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

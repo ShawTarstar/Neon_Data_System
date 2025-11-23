@@ -1,6 +1,7 @@
 package com.taxing.tliaswebmanagement.service.impl;
 
-import com.taxing.tliaswebmanagement.mapper.DeptMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.DeptMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleDeptMapper;
 import com.taxing.tliaswebmanagement.pojo.Dept;
 import com.taxing.tliaswebmanagement.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class DeptServiceImpl implements DeptService {
 
     @Autowired
     private DeptMapper deptMapper;
+    @Autowired
+    private OracleDeptMapper oracleDeptMapper;
     @Override
     public List<Dept> findAll() {
         return deptMapper.findAll();
@@ -24,6 +27,7 @@ public class DeptServiceImpl implements DeptService {
     public void deleteById(Integer id) {
 
         deptMapper.deleteById(id);
+        oracleDeptMapper.deleteById(id);
     }
 
     @Override
@@ -31,6 +35,7 @@ public class DeptServiceImpl implements DeptService {
         dept.setCreateTime(LocalDateTime.now());
         dept.setUpdateTime(LocalDateTime.now());
         deptMapper.insert(dept);
+        oracleDeptMapper.insert(dept);
     }
 
     @Override
@@ -42,6 +47,7 @@ public class DeptServiceImpl implements DeptService {
     public void update(Dept dept) {
         dept.setUpdateTime(LocalDateTime.now());
         deptMapper.update(dept);
+        oracleDeptMapper.update(dept);
     }
 
     @Override

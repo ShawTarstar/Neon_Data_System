@@ -2,20 +2,21 @@ package com.taxing.tliaswebmanagement.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.taxing.tliaswebmanagement.mapper.EmpExprMapper;
-import com.taxing.tliaswebmanagement.mapper.EmpMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.EmpExprMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.EmpMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleEmpExprMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleEmpLogMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleEmpMapper;
 import com.taxing.tliaswebmanagement.pojo.*;
 import com.taxing.tliaswebmanagement.service.EmpLogService;
 import com.taxing.tliaswebmanagement.service.EmpService;
 import com.taxing.tliaswebmanagement.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,7 +29,11 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpMapper empMapper;
     @Autowired
+    private OracleEmpMapper oracleEmpMapper;
+    @Autowired
     private EmpExprMapper empExprMapper;
+    @Autowired
+    private OracleEmpExprMapper oracleEmpExprMapper;
     @Autowired
     private EmpLogService empLogService;
 
@@ -48,6 +53,7 @@ public class EmpServiceImpl implements EmpService {
             emp.setCreateTime(LocalDateTime.now());
             emp.setUpdateTime(LocalDateTime.now());
             empMapper.insert(emp);
+            oracleEmpMapper.insert(emp);
 
             List<EmpExpr> exprList=emp.getExprList();
             if(!CollectionUtils.isEmpty(exprList)){
@@ -56,6 +62,7 @@ public class EmpServiceImpl implements EmpService {
                     empExpr.setEmpId(emp.getId());
                 });
                 empExprMapper.insertBatch(exprList);
+                oracleEmpExprMapper.insertBatch(exprList);
             }
         }finally {
             EmpLog empLog=new EmpLog(null,LocalDateTime.now(),"新增员工"+emp);
@@ -68,7 +75,9 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public void delete(List<Integer> ids) {
         empMapper.deleteByIds(ids);
+        oracleEmpMapper.deleteByIds(ids);
         empExprMapper.deleteByEmpIds(ids);
+        oracleEmpExprMapper.deleteByEmpIds(ids);
     }
 
     @Override
@@ -81,11 +90,14 @@ public class EmpServiceImpl implements EmpService {
     public void update(Emp emp) {
         emp.setUpdateTime(LocalDateTime.now());
         empMapper.updateById(emp);
+        oracleEmpMapper.updateById(emp);
         empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+        oracleEmpExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
         List<EmpExpr> exprList=emp.getExprList();
         if(!CollectionUtils.isEmpty(exprList)){
             exprList.forEach(empExpr -> empExpr.setEmpId(emp.getId()));
             empExprMapper.insertBatch(exprList);
+            oracleEmpExprMapper.insertBatch(exprList);
         }
     }
 

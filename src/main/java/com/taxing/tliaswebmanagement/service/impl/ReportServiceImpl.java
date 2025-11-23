@@ -1,7 +1,7 @@
 package com.taxing.tliaswebmanagement.service.impl;
 
-import com.taxing.tliaswebmanagement.mapper.EmpMapper;
-import com.taxing.tliaswebmanagement.mapper.StudentMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.EmpMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.StudentMapper;
 import com.taxing.tliaswebmanagement.pojo.JobOption;
 import com.taxing.tliaswebmanagement.pojo.StudentOption;
 import com.taxing.tliaswebmanagement.service.ReportService;

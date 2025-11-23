@@ -1,9 +1,9 @@
 package com.taxing.tliaswebmanagement.aop;
 
-import com.taxing.tliaswebmanagement.mapper.CourseMapper;
-import com.taxing.tliaswebmanagement.mapper.OperateLogMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.CourseMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.OperateLogMapper;
 
-import com.taxing.tliaswebmanagement.mapper.StudentSelectionMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.StudentSelectionMapper;
 import com.taxing.tliaswebmanagement.pojo.student.other.OperateLogStudent;
 import com.taxing.tliaswebmanagement.pojo.student.other.StudentCourse;
 import com.taxing.tliaswebmanagement.utils.CurrentHolder;

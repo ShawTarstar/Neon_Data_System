@@ -2,13 +2,13 @@ package com.taxing.tliaswebmanagement.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.taxing.tliaswebmanagement.mapper.ClazzMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.ClazzMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleClazzMapper;
 import com.taxing.tliaswebmanagement.pojo.Clazz;
 import com.taxing.tliaswebmanagement.pojo.ClazzQueryParam;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
 import com.taxing.tliaswebmanagement.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -20,6 +20,8 @@ import java.util.List;
 public class ClazzServiceImpl implements ClazzService {
     @Autowired
     private ClazzMapper clazzMapper;
+    @Autowired
+    private OracleClazzMapper oracleClazzMapper;
 
     @Override
     public PageResult<Clazz> page(ClazzQueryParam clazzQueryParam) {
@@ -50,6 +52,7 @@ public class ClazzServiceImpl implements ClazzService {
         clazz.setCreateTime(LocalDateTime.now());
         clazz.setUpdateTime(LocalDateTime.now());
         clazzMapper.insert(clazz);
+        oracleClazzMapper.insert(clazz);
     }
 
     @Override
@@ -61,6 +64,7 @@ public class ClazzServiceImpl implements ClazzService {
     public void update(Clazz clazz) {
         clazz.setUpdateTime(LocalDateTime.now());
         clazzMapper.update(clazz);
+        oracleClazzMapper.update(clazz);
     }
 
     @Override
@@ -74,6 +78,7 @@ public class ClazzServiceImpl implements ClazzService {
     @Override
     public void delete(Integer id) {
         clazzMapper.delete(id);
+        oracleClazzMapper.delete(id);
     }
 
     @Override

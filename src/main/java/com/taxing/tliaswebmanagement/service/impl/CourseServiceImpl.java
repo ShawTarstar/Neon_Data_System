@@ -1,6 +1,6 @@
 package com.taxing.tliaswebmanagement.service.impl;
 
-import com.taxing.tliaswebmanagement.mapper.CourseMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.CourseMapper;
 import com.taxing.tliaswebmanagement.pojo.CourseVO;
 import com.taxing.tliaswebmanagement.pojo.EmpCourseId;
 import com.taxing.tliaswebmanagement.service.CourseService;

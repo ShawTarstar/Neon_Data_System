@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taxing.tliaswebmanagement.mapper.oracle.OracleStudentSelectionMapper">
+
+    <!-- list 查询 -->
+    <select id="list" resultType="com.taxing.tliaswebmanagement.pojo.student.other.StudentSelectionPageTemp">
+        SELECT
+        "id",
+        "empId",
+        "courseId",
+        "period"
+        FROM "emp_course"
+        WHERE 1 = 1
+
+        <if test="empIds != null and empIds.size() > 0">
+            AND "empId" IN
+            <foreach item="empId" collection="empIds" separator="," open="(" close=")">
+                #{empId}
+            </foreach>
+        </if>
+
+        <if test="periodIds != null and periodIds.size() > 0">
+            AND "period" IN
+            <foreach item="periodId" collection="periodIds" separator="," open="(" close=")">
+                #{periodId}
+            </foreach>
+        </if>
+    </select>
+
+
+    <!-- pageSelectedCourse 查询 -->
+    <select id="pageSelectedCourse"
+            resultType="com.taxing.tliaswebmanagement.pojo.student.VO.StudentSelectionPageVO">
+
+        SELECT DISTINCT
+            s."id" AS id,
+            c."course_name" AS courseName,
+            e."name" AS empName,
+            s."period" AS period,
+            s."empCourseId" AS empCourseId
+        FROM "student_course" s,
+             "emp_course" ec,
+             "course" c,
+             "emp" e
+        WHERE s."student_id" = #{id}
+          AND s."empCourseId" = ec."id"
+          AND ec."courseId" = c."id"
+          AND ec."empId" = e."id"
+    </select>
+
+</mapper>

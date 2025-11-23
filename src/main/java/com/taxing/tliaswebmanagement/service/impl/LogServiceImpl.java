@@ -2,7 +2,7 @@ package com.taxing.tliaswebmanagement.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.taxing.tliaswebmanagement.mapper.LogMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.LogMapper;
 import com.taxing.tliaswebmanagement.pojo.OperateLog;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
 import com.taxing.tliaswebmanagement.pojo.student.other.OperateLogStudent;

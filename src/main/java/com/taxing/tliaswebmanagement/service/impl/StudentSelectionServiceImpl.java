@@ -5,10 +5,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.taxing.tliaswebmanagement.anno.StudentLog;
 import com.taxing.tliaswebmanagement.exception.BusinessException;
-import com.taxing.tliaswebmanagement.mapper.CourseMapper;
-import com.taxing.tliaswebmanagement.mapper.EmpMapper;
-import com.taxing.tliaswebmanagement.mapper.StudentSelectionMapper;
-import com.taxing.tliaswebmanagement.pojo.Clazz;
+import com.taxing.tliaswebmanagement.mapper.mysql.CourseMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.EmpMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.StudentSelectionMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleCourseMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleEmpMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleStudentSelectionMapper;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
 import com.taxing.tliaswebmanagement.pojo.student.DTO.StudentSelectionPageDTO;
 import com.taxing.tliaswebmanagement.pojo.student.VO.StudentSelectionPageVO;
@@ -29,9 +31,15 @@ public class StudentSelectionServiceImpl implements StudentSelectionService {
     @Autowired
     private StudentSelectionMapper studentSelectionMapper;
     @Autowired
+    private OracleStudentSelectionMapper oracleStudentSelectionMapper;
+    @Autowired
     private EmpMapper empMapper;
     @Autowired
+    private OracleEmpMapper oracleEmpMapper;
+    @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private OracleCourseMapper oracleCourseMapper;
     @Override
     public PageResult<StudentSelectionPageVO> page(StudentSelectionPageDTO studentSelectionPageDTO) {
         //被占用的时段
@@ -116,6 +124,7 @@ public class StudentSelectionServiceImpl implements StudentSelectionService {
         StudentCourse studentCourse=new StudentCourse
                 (studentId,courseIdAndPeriod.getCourseId(),courseIdAndPeriod.getPeriod(),empCourseId);
         studentSelectionMapper.insert(studentCourse);
+        oracleStudentSelectionMapper.insert(studentCourse);
     }
 
     @Override
@@ -130,6 +139,7 @@ public class StudentSelectionServiceImpl implements StudentSelectionService {
     @Override
     public void delete(Integer id) {
         studentSelectionMapper.delete(id);
+        oracleStudentSelectionMapper.delete(id);
     }
 
     private static List<Integer> getOccupiedPeriodsWithDateOrTime(Integer num,boolean type){

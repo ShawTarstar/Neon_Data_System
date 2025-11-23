@@ -2,7 +2,8 @@ package com.taxing.tliaswebmanagement.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.taxing.tliaswebmanagement.mapper.StudentMapper;
+import com.taxing.tliaswebmanagement.mapper.mysql.StudentMapper;
+import com.taxing.tliaswebmanagement.mapper.oracle.OracleStudentMapper;
 import com.taxing.tliaswebmanagement.pojo.PageResult;
 import com.taxing.tliaswebmanagement.pojo.Student;
 import com.taxing.tliaswebmanagement.pojo.StudentQueryParam;
@@ -24,6 +25,8 @@ import java.util.Map;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentMapper studentMapper;
+    @Autowired
+    OracleStudentMapper oracleStudentMapper;
 
     @Override
     public PageResult<Student> page(StudentQueryParam studentQueryParam) {
@@ -40,6 +43,7 @@ public class StudentServiceImpl implements StudentService {
         student.setCreateTime(LocalDateTime.now());
         student.setUpdateTime(LocalDateTime.now());
         studentMapper.insert(student);
+        oracleStudentMapper.insert(student);
     }
 
     @Override
@@ -51,18 +55,22 @@ public class StudentServiceImpl implements StudentService {
     public void update(Student student) {
         student.setUpdateTime(LocalDateTime.now());
         studentMapper.update(student);
+        oracleStudentMapper.updateStudentLoginInfo(student);
         studentMapper.updateStudentLoginInfo(student);
+        oracleStudentMapper.updateStudentLoginInfo(student);
     }
 
     @Override
     public void delete(List<Integer> ids) {
         studentMapper.delete(ids);
+        oracleStudentMapper.delete(ids);
     }
 
     @Override
     public void violation(Integer id, Integer score) {
         LocalDateTime updateTime=LocalDateTime.now();
         studentMapper.violation(id,score,updateTime);
+        oracleStudentMapper.violation(id,score,updateTime);
     }
 
     /**
