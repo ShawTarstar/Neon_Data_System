@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.taxing.tliaswebmanagement.mapper.oracle.OracleSyncMapper">
+
+
+    <insert id="clazzInsert">
+        INSERT INTO "clazz" (
+            "id","name","room","begin_date","end_date",
+            "master_id","subject","create_time","update_time"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{name,jdbcType=VARCHAR},
+            #{room,jdbcType=VARCHAR},
+            #{begin_date,jdbcType=DATE},
+            #{end_date,jdbcType=DATE},
+            #{master_id,jdbcType=INTEGER},
+            #{subject,jdbcType=INTEGER},
+            #{create_time,jdbcType=TIMESTAMP},
+            #{update_time,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="courseInsert">
+        INSERT INTO "course" (
+            "id","course_name"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{course_name,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="deptInsert">
+        INSERT INTO "dept" (
+            "id","name","create_time","update_time"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{name,jdbcType=VARCHAR},
+            #{create_time,jdbcType=TIMESTAMP},
+            #{update_time,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="empInsert">
+        INSERT INTO "emp" (
+            "id","username","password","name",
+            "gender","phone","job","salary","image",
+            "entry_date","dept_id","create_time","update_time"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{username,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{gender,jdbcType=INTEGER},
+            #{phone,jdbcType=VARCHAR},
+            #{job,jdbcType=INTEGER},
+            #{salary,jdbcType=INTEGER},
+            #{image,jdbcType=VARCHAR},
+            #{entry_date,jdbcType=DATE},
+            #{dept_id,jdbcType=INTEGER},
+            #{create_time,jdbcType=DATE},
+            #{update_time,jdbcType=DATE}
+        )
+    </insert>
+    <insert id="empCourseInsert">
+        INSERT INTO "emp_course" (
+            "id","empId","courseId","period"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{empId,jdbcType=INTEGER},
+            #{courseId,jdbcType=INTEGER},
+            #{period,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="empExprInsert">
+        INSERT INTO "emp_expr" (
+            "id","emp_id","begin","end",
+            "company","job"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{emp_id,jdbcType=INTEGER},
+            #{begin,jdbcType=DATE},
+            #{end,jdbcType=DATE},
+            #{company,jdbcType=VARCHAR},
+            #{job,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="empLogInsert">
+        INSERT INTO "emp_log" (
+            "id","operate_time","info"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{operateTime,jdbcType=TIMESTAMP},
+            #{info,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="operateLogInsert">
+        INSERT INTO "operate_log" (
+            "id","operate_emp_id","operate_time","class_name",
+            "method_name","method_params","return_value","cost_time"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{operateEmpId,jdbcType=INTEGER},
+            #{operateTime,jdbcType=TIMESTAMP},
+            #{className,jdbcType=VARCHAR},
+            #{methodName,jdbcType=VARCHAR},
+            #{methodParams,jdbcType=VARCHAR},
+            #{returnValue,jdbcType=VARCHAR},
+            #{costTime,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="studentInsert">
+        INSERT INTO "student" (
+            "id","name","no","gender","phone",
+            "id_card","is_college","address","degree","graduation_date",
+            "clazz_id","violation_count","violation_score","create_time","update_time"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{name,jdbcType=VARCHAR},
+            #{no,jdbcType=VARCHAR},
+            #{gender,jdbcType=INTEGER},
+            #{phone,jdbcType=VARCHAR},
+            #{idCard,jdbcType=VARCHAR},
+            #{isCollege,jdbcType=INTEGER},
+            #{address,jdbcType=VARCHAR},
+            #{degree,jdbcType=INTEGER},
+            #{graduationDate,jdbcType=DATE},
+            #{clazzId,jdbcType=INTEGER},
+            #{violationCount,jdbcType=SMALLINT},
+            #{violationScore,jdbcType=SMALLINT},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="studentCourseInsert">
+        INSERT INTO "student_course" (
+            "id","student_id","course_id","period","empCourseId"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{studentId,jdbcType=INTEGER},
+            #{courseId,jdbcType=INTEGER},
+            #{period,jdbcType=INTEGER},
+            #{empCourseId,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="studentLoginInsert">
+        INSERT INTO "student_login" (
+            "id","no","name","password"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{no,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="studentOperateLogInsert">
+        INSERT INTO "student_operate_log" (
+            "id","operate_student_id","operate_time","operation","courseName",
+            "period"
+        ) VALUES (
+            #{id,jdbcType=INTEGER},
+            #{operateStudentId,jdbcType=INTEGER},
+            #{operateTime,jdbcType=TIMESTAMP},
+            #{operation,jdbcType=VARCHAR},
+            #{courseName,jdbcType=VARCHAR},
+            #{period,jdbcType=INTEGER}
+        )
+    </insert>
+    <update id="ClazzUpdate">
+        UPDATE "clazz" SET
+            "name" = NVL(#{name,jdbcType=VARCHAR}, "name"),
+            "room" = NVL(#{room,jdbcType=VARCHAR}, "room"),
+            "begin_date" = NVL(#{begin_date,jdbcType=DATE}, "begin_date"),
+            "end_date" = NVL(#{end_date,jdbcType=DATE}, "end_date"),
+            "master_id" = NVL(#{master_id,jdbcType=INTEGER}, "master_id"),
+            "subject" = NVL(#{subject,jdbcType=INTEGER}, "subject"),
+            "create_time" = NVL(#{create_time,jdbcType=TIMESTAMP}, "create_time"),
+            "update_time" = NVL(#{update_time,jdbcType=TIMESTAMP}, "update_time")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="CourseUpdate">
+        UPDATE "course" SET
+            "course_name" = NVL(#{course_name,jdbcType=VARCHAR}, "course_name")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="DeptUpdate">
+        UPDATE "dept" SET
+            "name" = NVL(#{name,jdbcType=VARCHAR}, "name"),
+            "create_time" = NVL(#{create_time,jdbcType=TIMESTAMP}, "create_time"),
+            "update_time" = NVL(#{update_time,jdbcType=TIMESTAMP}, "update_time")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="EmpUpdate">
+        UPDATE "emp" SET
+            "username" = NVL(#{username,jdbcType=VARCHAR}, "username"),
+            "password" = NVL(#{password,jdbcType=VARCHAR}, "password"),
+            "name" = NVL(#{name,jdbcType=VARCHAR}, "name"),
+            "gender" = NVL(#{gender,jdbcType=INTEGER}, "gender"),
+            "phone" = NVL(#{phone,jdbcType=VARCHAR}, "phone"),
+            "job" = NVL(#{job,jdbcType=INTEGER}, "job"),
+            "salary" = NVL(#{salary,jdbcType=INTEGER}, "salary"),
+            "image" = NVL(#{image,jdbcType=VARCHAR}, "image"),
+            "entry_date" = NVL(#{entry_date,jdbcType=DATE}, "entry_date"),
+            "dept_id" = NVL(#{dept_id,jdbcType=INTEGER}, "dept_id"),
+            "create_time" = NVL(#{create_time,jdbcType=DATE}, "create_time")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="EmpCourseUpdate">
+        UPDATE "emp_course" SET
+            "empId" = NVL(#{empId,jdbcType=INTEGER}, "empId"),
+            "courseId" = NVL(#{courseId,jdbcType=INTEGER}, "courseId"),
+            "period" = NVL(#{period,jdbcType=INTEGER}, "period")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="EmpExprUpdate">
+        UPDATE "emp_expr" SET
+            "emp_id" = NVL(#{emp_id,jdbcType=INTEGER}, "emp_id"),
+            "begin" = NVL(#{begin,jdbcType=DATE}, "begin"),
+            "end" = NVL(#{end,jdbcType=DATE}, "end"),
+            "company" = NVL(#{company,jdbcType=VARCHAR}, "company"),
+            "job" = NVL(#{job,jdbcType=VARCHAR}, "job")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="EmpLogUpdate">
+        UPDATE "emp_log" SET
+            "operate_time" = NVL(#{operateTime,jdbcType=TIMESTAMP}, "operate_time"),
+            "info" = NVL(#{info,jdbcType=VARCHAR}, "info")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="OperateLogUpdate">
+        UPDATE "operate_log" SET
+            "operate_emp_id" = NVL(#{operateEmpId,jdbcType=INTEGER}, "operate_emp_id"),
+            "operate_time" = NVL(#{operateTime,jdbcType=TIMESTAMP}, "operate_time"),
+            "class_name" = NVL(#{className,jdbcType=VARCHAR}, "class_name"),
+            "method_name" = NVL(#{methodName,jdbcType=VARCHAR}, "method_name"),
+            "method_params" = NVL(#{methodParams,jdbcType=VARCHAR}, "method_params"),
+            "return_value" = NVL(#{returnValue,jdbcType=VARCHAR}, "return_value"),
+            "cost_time" = NVL(#{costTime,jdbcType=VARCHAR}, "cost_time")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="StudentUpdate">
+        UPDATE "student" SET
+            "name" = NVL(#{name,jdbcType=VARCHAR}, "name"),
+            "no" = NVL(#{no,jdbcType=VARCHAR}, "no"),
+            "gender" = NVL(#{gender,jdbcType=INTEGER}, "gender"),
+            "phone" = NVL(#{phone,jdbcType=VARCHAR}, "phone"),
+            "id_card" = NVL(#{idCard,jdbcType=VARCHAR}, "id_card"),
+            "is_college" = NVL(#{isCollege,jdbcType=INTEGER}, "is_college"),
+            "address" = NVL(#{address,jdbcType=VARCHAR}, "address"),
+            "degree" = NVL(#{degree,jdbcType=INTEGER}, "degree"),
+            "graduation_date" = NVL(#{graduationDate,jdbcType=DATE}, "graduation_date"),
+            "clazz_id" = NVL(#{clazzId,jdbcType=INTEGER}, "clazz_id"),
+            "violation_count" = NVL(#{violationCount,jdbcType=SMALLINT}, "violation_count"),
+            "violation_score" = NVL(#{violationScore,jdbcType=SMALLINT}, "violation_score"),
+            "create_time" = NVL(#{createTime,jdbcType=TIMESTAMP}, "create_time"),
+            "update_time" = NVL(#{updateTime,jdbcType=TIMESTAMP}, "update_time")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+
+    </update>
+    <update id="StudentCourseUpdate">
+        UPDATE "student_course" SET
+            "student_id" = NVL(#{studentId,jdbcType=INTEGER}, "student_id"),
+            "course_id" = NVL(#{courseId,jdbcType=INTEGER}, "course_id"),
+            "period" = NVL(#{period,jdbcType=INTEGER}, "period"),
+            "empCourseId" = NVL(#{empCourseId,jdbcType=INTEGER}, "empCourseId")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="StudentLoginUpdate">
+        UPDATE "student_login" SET
+            "no" = NVL(#{no,jdbcType=VARCHAR}, "no"),
+            "name" = NVL(#{name,jdbcType=VARCHAR}, "name"),
+            "password" = NVL(#{password,jdbcType=VARCHAR}, "password")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="StudentOperateLogUpdate">
+        UPDATE "student_operate_log" SET
+            "operate_student_id" = NVL(#{operateStudentId,jdbcType=INTEGER}, "operate_student_id"),
+            "operate_time" = NVL(#{operateTime,jdbcType=TIMESTAMP}, "operate_time"),
+            "operation" = NVL(#{operation,jdbcType=VARCHAR}, "operation"),
+            "courseName" = NVL(#{courseName,jdbcType=VARCHAR}, "courseName"),
+            "period" = NVL(#{period,jdbcType=INTEGER}, "period")
+        WHERE "id" = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

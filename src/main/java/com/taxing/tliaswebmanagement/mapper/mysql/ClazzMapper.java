@@ -23,4 +23,5 @@ public interface ClazzMapper {
     void delete(Integer id);
 
     List<Clazz> selectAllClazzs();
+
 }

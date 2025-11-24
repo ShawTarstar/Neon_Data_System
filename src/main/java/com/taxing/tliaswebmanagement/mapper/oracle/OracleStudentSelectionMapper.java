@@ -34,8 +34,8 @@ public interface OracleStudentSelectionMapper {
     StudentCourse getPeriodCourse(Integer studentId, Integer period);
 
     // 插入选课信息
-    @Insert("INSERT INTO \"student_course\" (\"student_id\", \"course_id\", \"period\", \"empCourseId\") " +
-            "VALUES (#{studentId}, #{courseId}, #{period}, #{empCourseId})")
+    @Insert("INSERT INTO \"student_course\" (\"id\",\"student_id\", \"course_id\", \"period\", \"empCourseId\") " +
+            "VALUES (#{id},#{studentId}, #{courseId}, #{period}, #{empCourseId})")
     void insert(StudentCourse studentCourse);
 
     List<StudentSelectionPageVO> pageSelectedCourse(Integer id);

@@ -29,6 +29,10 @@ public class MysqlDataSourceConfig {
 
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        configuration.setMapUnderscoreToCamelCase(true);
+        configuration.setLogImpl(org.apache.ibatis.logging.stdout.StdOutImpl.class);
+        bean.setConfiguration(configuration);
         return bean.getObject();
     }
 

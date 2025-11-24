@@ -85,4 +85,5 @@ public class ClazzServiceImpl implements ClazzService {
     public List<Clazz> selectAllClazzs() {
         return clazzMapper.selectAllClazzs();
     }
+
 }

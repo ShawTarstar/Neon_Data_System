@@ -17,8 +17,8 @@ public interface OracleDeptMapper {
     @Delete("DELETE FROM \"dept\" WHERE \"id\" = #{id}")
     void deleteById(Integer id);
 
-    @Insert("INSERT INTO \"dept\"(\"name\", \"create_time\", \"update_time\") " +
-            "VALUES(#{name}, #{createTime}, #{updateTime})")
+    @Insert("INSERT INTO \"dept\"(\"id\",\"name\", \"create_time\", \"update_time\") " +
+            "VALUES(#{id},#{name}, #{createTime}, #{updateTime})")
     void insert(Dept dept);
 
     @Select("SELECT \"id\", \"name\", \"create_time\", \"update_time\" " +

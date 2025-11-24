@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentCourse {
+    private Integer id;
     private Integer StudentId;
     private Integer courseId;
     private Integer period;

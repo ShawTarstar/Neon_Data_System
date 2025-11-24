@@ -11,25 +11,25 @@ public interface OracleOperateLogMapper {
     // 插入后台操作日志
     @Insert(
             "INSERT INTO \"operate_log\"(" +
-                    "   \"operate_emp_id\", \"operate_time\", \"class_name\", " +
+                    "   \"id\",\"operate_emp_id\", \"operate_time\", \"class_name\", " +
                     "   \"method_name\", \"method_params\", \"return_value\", \"cost_time\"" +
                     ") VALUES (" +
-                    "   #{operateEmpId}, #{operateTime}, #{className}, " +
+                    "   #{id},#{operateEmpId}, #{operateTime}, #{className}, " +
                     "   #{methodName}, #{methodParams}, #{returnValue}, #{costTime}" +
                     ")"
     )
-    void insert(OperateLog log);
+    void insert(OperateLog log,Integer id);
 
 
     // 插入学生操作日志
     @Insert(
             "INSERT INTO \"student_operate_log\"(" +
-                    "   \"operate_student_id\", \"operate_time\", \"operation\", " +
+                    "   \"id\",\"operate_student_id\", \"operate_time\", \"operation\", " +
                     "   \"courseName\", \"period\"" +
                     ") VALUES (" +
-                    "   #{operateStudentId}, #{operateTime}, #{operation}, " +
+                    "   #{id},#{operateStudentId}, #{operateTime}, #{operation}, " +
                     "   #{courseName}, #{period}" +
                     ")"
     )
-    void studentInsert(OperateLogStudent log);
+    void studentInsert(OperateLogStudent log,Integer id);
 }

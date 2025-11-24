@@ -122,7 +122,7 @@ public class StudentSelectionServiceImpl implements StudentSelectionService {
             throw new BusinessException("该时段已被占用");
         }
         StudentCourse studentCourse=new StudentCourse
-                (studentId,courseIdAndPeriod.getCourseId(),courseIdAndPeriod.getPeriod(),empCourseId);
+                (null,studentId,courseIdAndPeriod.getCourseId(),courseIdAndPeriod.getPeriod(),empCourseId);
         studentSelectionMapper.insert(studentCourse);
         oracleStudentSelectionMapper.insert(studentCourse);
     }

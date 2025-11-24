@@ -7,11 +7,12 @@
     <!-- 批量插入员工经历 -->
     <insert id="insertBatch">
         INSERT INTO "emp_expr"(
-        "emp_id", "begin", "end", "company", "job"
+        "id","emp_id", "begin", "end", "company", "job"
         )
         VALUES
         <foreach collection="exprList" item="expr" separator=",">
             (
+            #{expr.id},
             #{expr.empId},
             #{expr.begin},
             #{expr.end},

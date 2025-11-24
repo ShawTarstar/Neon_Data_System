@@ -2,10 +2,7 @@ package com.taxing.tliaswebmanagement.mapper.mysql;
 
 import com.taxing.tliaswebmanagement.pojo.student.VO.StudentSelectionPageVO;
 import com.taxing.tliaswebmanagement.pojo.student.other.*;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -24,6 +21,7 @@ public interface StudentSelectionMapper {
             "and period=#{period}")
     StudentCourse getPeriodCourse(Integer studentId, Integer period);
 
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into student_course (student_id, course_id, period,empCourseId)" +
             "values (#{studentId},#{courseId},#{period},#{empCourseId})")
     void insert(StudentCourse studentCourse);
