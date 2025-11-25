@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CourseTable {
     private Integer id;
-    private String course_name;
+    private String courseName;
 }

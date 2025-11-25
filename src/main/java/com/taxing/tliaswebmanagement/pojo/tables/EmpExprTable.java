@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class EmpExprTable {
     private Integer id;
-    private Integer emp_id;
+    private Integer empId;
     private LocalDate begin;
     private LocalDate end;
     private String company;

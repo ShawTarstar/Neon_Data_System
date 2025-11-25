@@ -14,11 +14,11 @@ public class ClazzTable {
     private Integer id;
     private String name;
     private String room;
-    private LocalDate begin_date;
-    private LocalDate end_date;
-    private Integer master_id;
+    private LocalDate beginDate;
+    private LocalDate endDate;
+    private Integer masterId;
     private Integer subject;
-    private LocalDateTime create_time;
-    private LocalDateTime update_time;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 
 }

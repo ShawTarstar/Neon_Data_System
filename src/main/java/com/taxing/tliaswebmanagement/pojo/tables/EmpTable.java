@@ -19,8 +19,8 @@ public class EmpTable {
     private Integer job;
     private Integer salary;
     private String image;
-    private LocalDate entry_date;
-    private Integer dept_id;
-    private LocalDate create_time;
-    private LocalDate update_time;
+    private LocalDate entryDate;
+    private Integer deptId;
+    private LocalDate createTime;
+    private LocalDate updateTime;
 }

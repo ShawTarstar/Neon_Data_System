@@ -23,6 +23,20 @@ spring:
       host: localhost
       password: 123456
       database: 9
+  mail:
+    host: smtp.qq.com
+    username: 56128639@qq.com
+    password: zothwdsucvbzbgib
+    port: 587
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

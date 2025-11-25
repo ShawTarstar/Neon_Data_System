@@ -12,6 +12,6 @@ import java.time.LocalDateTime;
 public class DeptTable {
     private Integer id;
     private String name;
-    private LocalDateTime create_time;
-    private LocalDateTime update_time;
+    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 }

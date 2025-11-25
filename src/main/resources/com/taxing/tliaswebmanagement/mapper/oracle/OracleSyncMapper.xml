@@ -14,12 +14,12 @@
             #{id,jdbcType=INTEGER},
             #{name,jdbcType=VARCHAR},
             #{room,jdbcType=VARCHAR},
-            #{begin_date,jdbcType=DATE},
-            #{end_date,jdbcType=DATE},
-            #{master_id,jdbcType=INTEGER},
+            #{beginDate,jdbcType=DATE},
+            #{endDate,jdbcType=DATE},
+            #{masterId,jdbcType=INTEGER},
             #{subject,jdbcType=INTEGER},
-            #{create_time,jdbcType=TIMESTAMP},
-            #{update_time,jdbcType=TIMESTAMP}
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
         )
     </insert>
     <insert id="courseInsert">
@@ -27,7 +27,7 @@
             "id","course_name"
         ) VALUES (
             #{id,jdbcType=INTEGER},
-            #{course_name,jdbcType=VARCHAR}
+            #{courseName,jdbcType=VARCHAR}
         )
     </insert>
     <insert id="deptInsert">
@@ -36,8 +36,8 @@
         ) VALUES (
             #{id,jdbcType=INTEGER},
             #{name,jdbcType=VARCHAR},
-            #{create_time,jdbcType=TIMESTAMP},
-            #{update_time,jdbcType=TIMESTAMP}
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
         )
     </insert>
     <insert id="empInsert">
@@ -55,10 +55,10 @@
             #{job,jdbcType=INTEGER},
             #{salary,jdbcType=INTEGER},
             #{image,jdbcType=VARCHAR},
-            #{entry_date,jdbcType=DATE},
-            #{dept_id,jdbcType=INTEGER},
-            #{create_time,jdbcType=DATE},
-            #{update_time,jdbcType=DATE}
+            #{entryDate,jdbcType=DATE},
+            #{deptId,jdbcType=INTEGER},
+            #{createTime,jdbcType=DATE},
+            #{updateTime,jdbcType=DATE}
         )
     </insert>
     <insert id="empCourseInsert">
@@ -77,7 +77,7 @@
             "company","job"
         ) VALUES (
             #{id,jdbcType=INTEGER},
-            #{emp_id,jdbcType=INTEGER},
+            #{empId,jdbcType=INTEGER},
             #{begin,jdbcType=DATE},
             #{end,jdbcType=DATE},
             #{company,jdbcType=VARCHAR},
@@ -169,24 +169,24 @@
         UPDATE "clazz" SET
             "name" = NVL(#{name,jdbcType=VARCHAR}, "name"),
             "room" = NVL(#{room,jdbcType=VARCHAR}, "room"),
-            "begin_date" = NVL(#{begin_date,jdbcType=DATE}, "begin_date"),
-            "end_date" = NVL(#{end_date,jdbcType=DATE}, "end_date"),
-            "master_id" = NVL(#{master_id,jdbcType=INTEGER}, "master_id"),
+            "begin_date" = NVL(#{beginDate,jdbcType=DATE}, "begin_date"),
+            "end_date" = NVL(#{endDate,jdbcType=DATE}, "end_date"),
+            "master_id" = NVL(#{masterId,jdbcType=INTEGER}, "master_id"),
             "subject" = NVL(#{subject,jdbcType=INTEGER}, "subject"),
-            "create_time" = NVL(#{create_time,jdbcType=TIMESTAMP}, "create_time"),
-            "update_time" = NVL(#{update_time,jdbcType=TIMESTAMP}, "update_time")
+            "create_time" = NVL(#{createTime,jdbcType=TIMESTAMP}, "create_time"),
+            "update_time" = NVL(#{updateTime,jdbcType=TIMESTAMP}, "update_time")
         WHERE "id" = #{id,jdbcType=INTEGER}
     </update>
     <update id="CourseUpdate">
         UPDATE "course" SET
-            "course_name" = NVL(#{course_name,jdbcType=VARCHAR}, "course_name")
+            "course_name" = NVL(#{courseName,jdbcType=VARCHAR}, "course_name")
         WHERE "id" = #{id,jdbcType=INTEGER}
     </update>
     <update id="DeptUpdate">
         UPDATE "dept" SET
             "name" = NVL(#{name,jdbcType=VARCHAR}, "name"),
-            "create_time" = NVL(#{create_time,jdbcType=TIMESTAMP}, "create_time"),
-            "update_time" = NVL(#{update_time,jdbcType=TIMESTAMP}, "update_time")
+            "create_time" = NVL(#{createTime,jdbcType=TIMESTAMP}, "create_time"),
+            "update_time" = NVL(#{updateTime,jdbcType=TIMESTAMP}, "update_time")
         WHERE "id" = #{id,jdbcType=INTEGER}
     </update>
     <update id="EmpUpdate">
@@ -199,9 +199,9 @@
             "job" = NVL(#{job,jdbcType=INTEGER}, "job"),
             "salary" = NVL(#{salary,jdbcType=INTEGER}, "salary"),
             "image" = NVL(#{image,jdbcType=VARCHAR}, "image"),
-            "entry_date" = NVL(#{entry_date,jdbcType=DATE}, "entry_date"),
-            "dept_id" = NVL(#{dept_id,jdbcType=INTEGER}, "dept_id"),
-            "create_time" = NVL(#{create_time,jdbcType=DATE}, "create_time")
+            "entry_date" = NVL(#{entryDate,jdbcType=DATE}, "entry_date"),
+            "dept_id" = NVL(#{deptId,jdbcType=INTEGER}, "dept_id"),
+            "create_time" = NVL(#{createTime,jdbcType=DATE}, "create_time")
         WHERE "id" = #{id,jdbcType=INTEGER}
     </update>
     <update id="EmpCourseUpdate">
@@ -213,7 +213,7 @@
     </update>
     <update id="EmpExprUpdate">
         UPDATE "emp_expr" SET
-            "emp_id" = NVL(#{emp_id,jdbcType=INTEGER}, "emp_id"),
+            "emp_id" = NVL(#{empId,jdbcType=INTEGER}, "emp_id"),
             "begin" = NVL(#{begin,jdbcType=DATE}, "begin"),
             "end" = NVL(#{end,jdbcType=DATE}, "end"),
             "company" = NVL(#{company,jdbcType=VARCHAR}, "company"),
